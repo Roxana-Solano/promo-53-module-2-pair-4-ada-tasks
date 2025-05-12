@@ -2,8 +2,12 @@
 
 const list = document.querySelector(".task-list");
 const tachado = document.querySelector(".tachado"); //llamamos la clase
+const GITHUB_USER = "<>";
+const SERVER_URL = `https://dev.adalab.es/api/todo/${GITHUB_USER}`;
 
-const tasks = [
+let tasks = [];
+
+/*const tasks = [
   { name: "Recoger setas en el campo", completed: true, id: "task1" },
   { name: "Comprar pilas", completed: true, id: "task2" },
   { name: "Poner una lavadora de blancos", completed: true, id: "task3" },
@@ -12,7 +16,7 @@ const tasks = [
     completed: false,
     id: "task4",
   },
-];
+];*/
 
 for (const task of tasks) {
   list.insertAdjacentHTML(
@@ -30,3 +34,10 @@ function eventClick(e) {
     e.currentTarget.classList.remove("tachado");
   }
 } //target el que hace click, el de dentro // el currentTarget el de fuera al que se le agrega la clase
+
+
+fetch(SERVER_URL).then();
+
+
+//Completa el código;
+//Guarda la respuesta obtenida enla variable para el listado de tareas: `tasks`
