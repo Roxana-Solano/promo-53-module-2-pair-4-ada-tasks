@@ -2,7 +2,7 @@
 
 const list = document.querySelector(".task-list");
 const tachado = document.querySelector(".tachado"); //llamamos la clase
-const GITHUB_USER = "<>";
+const GITHUB_USER = "<https://github.com/Roxana-Solano/promo-53-module-2-pair-4-ada-tasks>";
 const SERVER_URL = `https://dev.adalab.es/api/todo/${GITHUB_USER}`;
 
 let tasks = [];
@@ -36,7 +36,21 @@ function eventClick(e) {
 } //target el que hace click, el de dentro // el currentTarget el de fuera al que se le agrega la clase
 
 
-fetch(SERVER_URL).then();
+fetch(SERVER_URL, 
+  {
+method: "POST",
+headers: {"Content-Type": "application/json"},
+body: JSON.stringify(newInformation)
+
+}
+)
+.then(res => res.json())
+.then(dataResponseSave => {
+  console.log (dataResponsave);
+
+});
+
+
 
 
 //Completa el código;
