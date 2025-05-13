@@ -7,19 +7,6 @@ const SERVER_URL = `https://dev.adalab.es/api/todo/${GITHUB_USER}`;
 
 let tasks = [];
 
-/*const tasks = [
-  { name: "Recoger setas en el campo", completed: true, id: "task1" },
-  { name: "Comprar pilas", completed: true, id: "task2" },
-  { name: "Poner una lavadora de blancos", completed: true, id: "task3" },
-  {
-    name: "Aprender cómo se realizan las peticiones al servidor en JavaScript",
-    completed: false,
-    id: "task4",
-  },
-];*/
-
-/*  */
-
 function eventClick(e) {
   if (e.target.checked) {
     e.currentTarget.classList.add("tachado");
@@ -34,7 +21,7 @@ function renderTasks() {
     list.insertAdjacentHTML(
       "beforeend",
       `<li id="id-${task.id}"><input type= "checkbox"/>${task.name}</li>`
-    ); // beforeend donde queremos posicionar el texto (agregar + tareas)
+    );
     const check = document.querySelector(`#id-${task.id}`);
     check.addEventListener("change", eventClick);
   }
@@ -54,6 +41,19 @@ fetch(SERVER_URL)
 
     console.log(data);
   });
+
+function createTaskCounter() {
+  // Revisamos si ya existe el elemento, para no duplicarlo
+  if (!document.querySelector(".task-counter")) {
+    const container = document.querySelector(".task-list").parentElement;
+    const counterElement = document.createElement("p");
+    counterElement.classList.add("task-counter");
+    container.insertBefore(
+      counterElement,
+      container.querySelector(".task-list")
+    );
+  }
+}
 
 //Completa el código;
 //Guarda la respuesta obtenida enla variable para el listado de tareas: `tasks`
