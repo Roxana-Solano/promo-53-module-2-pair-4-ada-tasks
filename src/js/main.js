@@ -2,7 +2,7 @@
 
 const list = document.querySelector(".task-list");
 const tachado = document.querySelector(".tachado"); //llamamos la clase
-const GITHUB_USER = "<https://github.com/Roxana-Solano/promo-53-module-2-pair-4-ada-tasks>";
+const GITHUB_USER = "roxana-solano";
 const SERVER_URL = `https://dev.adalab.es/api/todo/${GITHUB_USER}`;
 
 let tasks = [];
@@ -18,14 +18,7 @@ let tasks = [];
   },
 ];*/
 
-for (const task of tasks) {
-  list.insertAdjacentHTML(
-    "beforeend",
-    `<li id="${task.id}"><input type= "checkbox"/>${task.name}</li>`
-  ); // beforeend donde queremos posicionar el texto (agregar + tareas)
-  const check = document.querySelector(`#${task.id}`);
-  check.addEventListener("change", eventClick);
-}
+/*  */
 
 function eventClick(e) {
   if (e.target.checked) {
@@ -34,24 +27,33 @@ function eventClick(e) {
     e.currentTarget.classList.remove("tachado");
   }
 } //target el que hace click, el de dentro // el currentTarget el de fuera al que se le agrega la clase
+function renderTasks() {
+  list.innerHTML = "";
 
-
-fetch(SERVER_URL, 
-  {
-method: "POST",
-headers: {"Content-Type": "application/json"},
-body: JSON.stringify(newInformation)
-
+  for (const task of tasks) {
+    list.insertAdjacentHTML(
+      "beforeend",
+      `<li id="id-${task.id}"><input type= "checkbox"/>${task.name}</li>`
+    ); // beforeend donde queremos posicionar el texto (agregar + tareas)
+    const check = document.querySelector(`#id-${task.id}`);
+    check.addEventListener("change", eventClick);
+  }
+  updateTaskCounter();
 }
-)
-.then(res => res.json())
-.then(dataResponseSave => {
-  console.log (dataResponsave);
+fetch(SERVER_URL)
+  /* {
+    method: "GET", 
+    }  */
 
-});
+  .then((response) => {
+    return response.json();
+  })
+  .then((data) => {
+    tasks = data.results;
+    renderTasks();
 
-
-
+    console.log(data);
+  });
 
 //Completa el código;
 //Guarda la respuesta obtenida enla variable para el listado de tareas: `tasks`
